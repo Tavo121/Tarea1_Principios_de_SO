@@ -1,0 +1,30 @@
+
+#include <stdio.h>
+#include <system.h>
+#include <altera_avalon_pio_regs.h>
+
+int main()
+{
+	/*
+	 * 1 = 0x79
+	 * 2 = 0x24
+	 * 3 = 0x30
+	 * 4 = 0x19
+	 * 5 = 0x12
+	 * 6 = 0x02
+	 * 7 = 0x78
+	 * 8 = 0x00
+	 * 9 = 0x10
+	 * 0 = 0x40
+	 */
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_0_BASE, 0x79);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_1_BASE, 0x79);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_2_BASE, 0x79);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_3_BASE, 0x79);
+	printf("Hello from Nios II!\n");
+
+	while(1)
+	{ }
+
+	return 0;
+}

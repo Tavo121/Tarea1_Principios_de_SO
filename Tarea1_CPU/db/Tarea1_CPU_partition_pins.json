@@ -1,0 +1,173 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "buzzer_export",
+					"strict" : false
+				},
+				{
+					"name" : "leds_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_export[2]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_export[3]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_export[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_0_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_0_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_0_export[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_0_export[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_0_export[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_0_export[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_0_export[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_1_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_1_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_1_export[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_1_export[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_1_export[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_1_export[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_1_export[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_2_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_2_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_2_export[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_2_export[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_2_export[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_2_export[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_2_export[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_3_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_3_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_3_export[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_3_export[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_3_export[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_3_export[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_3_export[6]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_clk",
+					"strict" : false
+				},
+				{
+					"name" : "btn_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "btn_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "switches_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "switches_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "switches_export[2]",
+					"strict" : false
+				},
+				{
+					"name" : "switches_export[3]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

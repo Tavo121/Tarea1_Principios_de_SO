@@ -1,0 +1,71 @@
+
+#include <stdio.h>
+#include <system.h>
+#include <altera_avalon_pio_regs.h>
+#include <altera_avalon_timer_regs.h>
+
+#define TIMER_PERIOD 50000000    // 50 MHz
+
+// Configurar el valor del periodo del temporizador
+IOWR_ALTERA_AVALON_TIMER_PERIODH(TIMER_0_BASE, (TIMER_PERIOD >> 16) & 0xFFFF);  // 0x002F
+IOWR_ALTERA_AVALON_TIMER_PERIODL(TIMER_0_BASE, TIMER_PERIOD & 0xFFFF);          // 0xA080
+
+// Limpiar el estado del temporizador por si acaso
+IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_0_BASE, 0x0);
+
+// Configurar el temporizador para que se ejecute en modo continuo y habilite las interrupciones
+IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_0_BASE, 0x7);
+
+volatile int seconds = 0;
+
+void timer_isr(void* context) {
+    // Limpiar el bit de interrupción del temporizador
+    IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_0_BASE, 0x0);
+
+    // Incrementar el contador de segundos
+    seconds++;
+    // Aquí podrías agregar código para actualizar la pantalla o activar una alarma.
+}
+
+int main()
+{
+	/*
+	 * 1 = 0x79
+	 * 2 = 0x24
+	 * 3 = 0x30
+	 * 4 = 0x19
+	 * 5 = 0x12
+	 * 6 = 0x02
+	 * 7 = 0x78
+	 * 8 = 0x00
+	 * 9 = 0x10
+	 * 0 = 0x40
+	 */
+	unsigned int result = 0;
+	if (seconds == 0){result = 0x40;}
+	else if (seconds == 1){result = 0x79;}
+	else if (seconds == 2){result = 0x24;}
+	else if (seconds == 3){result = 0x30;}
+	else if (seconds == 4){result = 0x19;}
+	else if (seconds == 5){result = 0x12;}
+	else if (seconds == 6){result = 0x02;}
+	else if (seconds == 7){result = 0x78;}
+	else if (seconds == 8){result = 0x00;}
+	else if (seconds == 9){result = 0x10;}
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_0_BASE, result);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_1_BASE, 0x79);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_2_BASE, 0x79);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_3_BASE, 0x79);
+
+	// Registrar la ISR para el temporizador
+	alt_irq_register(TIMER_IRQ, NULL, timer_isr);
+
+	// Configuración del temporizador como se explicó anteriormente
+
+	printf("Hello from Nios II!\n");
+
+	while(1)
+	{ }
+
+	return 0;
+}

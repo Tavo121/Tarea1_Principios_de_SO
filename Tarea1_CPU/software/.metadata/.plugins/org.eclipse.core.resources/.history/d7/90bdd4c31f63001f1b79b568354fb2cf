@@ -1,0 +1,75 @@
+
+#include <stdio.h>
+#include <system.h>
+#include <altera_avalon_pio_regs.h>
+#include <altera_avalon_timer_regs.h>
+#include "sys/alt_irq.h"
+#include "segments.h"
+
+int seconds = 0;
+int minutes_0 = 0;
+int minutes_1 = 0;
+int hour_0 = 0;
+int hour_1 = 0;
+
+void init_timer_interrupt(void);
+static void timer_isr(void * context, alt_u32 id);
+
+void init_timer_interrupt(void)
+{
+	alt_ic_isr_register(TIMER_IRQ_INTERRUPT_CONTROLLER_ID, TIMER_IRQ, (void *)timer_isr, NULL, 0x0);
+
+	IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_BASE, ALTERA_AVALON_TIMER_CONTROL_START_MSK
+													| ALTERA_AVALON_TIMER_CONTROL_ITO_MSK
+													| ALTERA_AVALON_TIMER_CONTROL_CONT_MSK);
+}
+
+void timer_isr(void * context, alt_u32 id)
+{
+	unsigned int Segments_0 = 0;
+
+	//Limpiar el estado de la interrupcion
+	IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_BASE, 0);
+
+	if (seconds > 60){
+		seconds = 0;
+		minutes_0++;
+	}
+
+	Segments_0 = display_segments(minutes_0);
+
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_0_BASE, Segments_0);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_1_BASE, 0x00);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_2_BASE, 0x79);
+	IOWR_ALTERA_AVALON_PIO_DATA(SEG_3_BASE, 0x79);
+
+	seconds++;
+
+}
+
+int main(void)
+{
+	/*
+	 * 1 = 0x79
+	 * 2 = 0x24
+	 * 3 = 0x30
+	 * 4 = 0x19
+	 * 5 = 0x12
+	 * 6 = 0x02
+	 * 7 = 0x78
+	 * 8 = 0x00
+	 * 9 = 0x10
+	 * 0 = 0x40
+	 */
+
+	printf("Hello from Nios II!\n");
+
+	init_timer_interrupt();
+
+	while(1)
+	{
+
+	}
+
+	return 0;
+}
